@@ -18,12 +18,28 @@ class Money
 		$this->providers[] = new Providers\CbrfProvider(new GuzzleClient);
 	}
 	
+	/**
+     * For the future extendability
+     *
+     * @param \Qireel\Money\AbstractProvider $rate
+     * @return self
+	 *
+     */
 	public function registerProvider(AbstractProvider $provider)
 	{
 		$this->providers[] = $provider;
 		return $this;
 	}
 	
+	/**
+     * Main and lonely package functionality
+     *
+     * @param string $target
+     * @param string $base
+     * @param \DateTime $date
+     * 
+     * @return \Qireel\Money\CurrencyRate
+     */
 	public function getMeasureRate($target, $base, DateTime $date)
 	{
 		$mrc = new MeasureRateCalculator;

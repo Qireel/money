@@ -6,6 +6,9 @@ use Qireel\Money\CurrencyRate;
 
 class MeasureRateCalculator
 {
+	/**
+     * @var array List of \Qireel\Money\CurrencyRate objects
+     */	
 	protected $rates;
 	
 	public function __construct($rates = [])
@@ -13,12 +16,25 @@ class MeasureRateCalculator
 		$this->rates = $rates;
 	}
 	
+	/**
+     * For the future extendability
+     *
+     * @param \Qireel\Money\CurrencyRate $rate
+     * @return self
+	 *
+     */
 	public function addRate(CurrencyRate $rate)
 	{
 		$this->rates[] = $rate;
 		return $this;
 	}
-	
+		
+	/**
+     * Does some MATAN (!) and calculates measure value of rates
+     *
+     * @return float
+	 *
+     */
 	public function getResult()
 	{
 		$sum = .0;

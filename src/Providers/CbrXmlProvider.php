@@ -30,6 +30,14 @@ class CbrXmlProvider extends AbstractProvider
         $this->guzzle = $guzzle;
     }
 	
+	/**
+     * Main function of the provider gives a CurrencyRate object.
+     *
+     * @param string $target
+     * @param string $base
+     * @param \DateTime $date
+     * @return \Qireel\Money\CurrencyRate
+     */
 	public function getRate($target, $base = 'RUR', DateTime $date = null)
 	{
 		if ($date == null) {
@@ -50,7 +58,15 @@ class CbrXmlProvider extends AbstractProvider
 		
 		return new CurrencyRate($base, $target, $this->source, $date, $response['rate']);
 	}
-	
+		
+	/**
+     * Deals with HTTP stuff.
+     *
+     * @return array $response
+	 *
+	 * @throws \Qireel\Money\Exceptions\ConnectionException
+	 * @throws \Qireel\Money\Exceptions\ResponseException
+     */	
 	public function query()
 	{
 		$params = $this->urlParams;

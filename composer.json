@@ -1,0 +1,17 @@
+{
+    "name": "qireel/money",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kirill Karmachev",
+            "email": "kirill.karmachev@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.2"
+    }
+}

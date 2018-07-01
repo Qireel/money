@@ -4,6 +4,8 @@ namespace Qireel\Money\Providers;
 
 use Qireel\Money\AbstractProvider;
 use Qireel\Money\CurrencyRate;
+use Qireel\Money\Exceptions\ConnectionException;
+use Qireel\Money\Exceptions\ResponseException;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\TransferException;
 use DateTime;
@@ -31,6 +33,10 @@ class CbrfProvider extends AbstractProvider
 	
 	public function getRate($target, $base = 'RUR', DateTime $date = null)
 	{
+		if ($date == null) {
+			$date = new DateTime;
+		}
+		
 		$paramDate = $date->format('Y-m-d');
 		
 		$this->urlParams['currency_to'] = $base;
@@ -50,7 +56,7 @@ class CbrfProvider extends AbstractProvider
 		try {
             $response = $this->guzzle->request('GET', $url);
         } catch (TransferException $e) {
-            //throw new ConnectionException($e->getMessage());
+            throw new ConnectionException($e->getMessage());
         }
 		
 		$response = json_decode($response->getBody(), true);
@@ -58,7 +64,7 @@ class CbrfProvider extends AbstractProvider
 		if (isset($response['status']) && $response['status'] == 200 && isset($response['data'])) {
             return $response;
         } else {
-            //throw new ResponseException('Response body is malformed.');
+            throw new ResponseException('Response body is malformed.');
         }
 	}
 }

@@ -6,7 +6,7 @@ use DateTime;
 
 interface Provider
 {
-	/**
+    /**
      * Main function of the provider gives a CurrencyRate object.
      *
      * @param string $target
@@ -14,15 +14,15 @@ interface Provider
      * @param \DateTime $date
      * @return \Qireel\Money\CurrencyRate
      */
-	public function getRate($target, $base = 'RUR', DateTime $date = null);
-	
-	/**
+    public function getRate($target, $base = 'RUR', DateTime $date = null);
+    
+    /**
      * Deals with HTTP stuff.
      *
      * @return array $response
-	 *
-	 * @throws \Qireel\Money\Exceptions\ConnectionException
-	 * @throws \Qireel\Money\Exceptions\ResponseException
-     */	
-	public function query();
+     *
+     * @throws \Qireel\Money\Exceptions\ConnectionException
+     * @throws \Qireel\Money\Exceptions\ResponseException
+     */    
+    public function query();
 }
